@@ -1,0 +1,14 @@
+---
+alwaysApply: true
+description: 優先使用倉庫根目錄的 justfile（Just）執行建置、測試與資料庫等任務
+---
+
+## Just（justfile）優先
+
+專案根目錄有 `justfile`。在需要建置、執行、測試、格式化、EF migration、部署或 CI 類工作時，**優先**使用 `just` 指令，而不是自行拼出等效的長串 `dotnet`／腳本路徑。
+
+1. **先確認可用配方**：在倉庫根目錄執行 `just --list`（或閱讀 `justfile`）取得現有任務名稱。
+2. **對應任務就呼叫 `just <配方名>`**，例如：`just run`、`just build`、`just test`、`just ci`、`just mig-add-mssql <名稱>` 等。
+3. 若沒有對應配方，再改用 `dotnet`、PowerShell 或其他方式；必要時可建議在 `justfile` 新增配方以利之後重用。
+
+此規則旨在與團隊既有腳本一致，並減少重複或遺漏步驟（例如忘記 `api-stop` 前置條件）。

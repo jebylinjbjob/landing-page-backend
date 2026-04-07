@@ -1,0 +1,27 @@
+---
+description: 依 landing-page-backend/.editorconfig 與 .NET 慣例產出與格式化程式碼
+alwaysApply: true
+---
+
+# 編碼風格（EditorConfig）
+
+撰寫或修改本專案程式時，**以** `landing-page-backend/.editorconfig` **為單一依據**；格式化、診斷與命名規則以該檔與 IDE（含 `dotnet format` / EditorConfig）為準，不要另立與檔案衝突的「口頭風格」。
+
+## 變更流程
+
+- 需調整團隊風格時，優先**改 `.editorconfig`**（或對應的 analyzer 規則），再讓工具與 AI 跟隨。
+- 產出程式碼後，若環境允許，以專案慣用的格式化指令對齊（例如透過 `justfile` 中已定義的 format 任務）。
+
+## C# 重點摘要（方便對照，細節仍以 `.editorconfig` 為準）
+
+| 主題         | 約定                                                                                                                                                         |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 縮排與行尾   | `*.cs`：4 空格；`*.xml`：2 空格；行尾 **LF**；檔尾換行。                                                                                                     |
+| `using`      | `System` 相關置頂並**分組**；`using` 放在 **namespace 外**（`csharp_using_directive_placement`）。                                                           |
+| `var`        | 專案設定為**少用 `var`**（型別明確處優先寫明型別）。                                                                                                         |
+| 大括號       | `csharp_prefer_braces`：**偏好一律加括號**（與 Allman 等換行設定一致）。                                                                                     |
+| 成員寫法     | 方法／建構式等偏好**區塊本體**；簡單屬性／accessor 可用 expression-bodied（見檔內 `csharp_style_expression_bodied_*`）。                                     |
+| 欄位與可變性 | 可設為 `readonly` 的欄位應標 `readonly`（規則為 **warning**）；區域函式偏好 `static`（**warning**）。                                                        |
+| 命名         | 介面 `I` + PascalCase；型別參數 `T` + PascalCase；**私用執行個體欄位** `_camelCase`；**私用 static 欄位** `s_camelCase`；其餘見檔內 `dotnet_naming_rule.*`。 |
+
+若實作與上表或 `.editorconfig` 不一致，**先對齊設定檔**，再提交。
